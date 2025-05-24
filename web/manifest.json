@@ -1,11 +1,11 @@
 {
-    "name": "portfolio_erfanalizada",
-    "short_name": "portfolio_erfanalizada",
+    "name": "Erfan Alizada Portfolio",
+    "short_name": "Erfan Portfolio",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Portfolio website of Erfan Alizada",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
