@@ -62,6 +62,11 @@ flutter:
     - assets/KohSantepheap-Bold.ttf
     - assets/KohSantepheap-Light.ttf
     - assets/pictures/project_pic.png
+    - assets/pictures/profile_pic.png
+    - assets/pictures/flutter_pic.png
+    - assets/pictures/react_pic.png
+    - assets/pictures/java_pic.png
+    - assets/pictures/nl_pic.png
 
   # Font configuration
   fonts:

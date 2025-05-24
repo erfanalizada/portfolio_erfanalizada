@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_theme_changer_erfan/dynamic_theme_picker.dart';
 import 'package:portfolio_erfanalizada/interfaces/main_manager_interface.dart';
 import 'package:portfolio_erfanalizada/managers/main_manager.dart';
-import 'package:portfolio_erfanalizada/screens/yellow_button_test_screen.dart';
+import 'package:portfolio_erfanalizada/screens/portfolio_screen.dart';
 
 // Create a provider to track if initialization is complete
 final initializationCompleteProvider = StateProvider<bool>((ref) => false);
@@ -64,7 +64,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return ThemeChanger(
       title: _mainManager.getAppTitle(),
       defaultColor: defaultColor,
-      child: const YellowButtonTestScreen(),
+      child: const PortfolioScreen(),
     );
   }
 }
