@@ -91,6 +91,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return ThemeChanger(
       title: 'Portfolio Erfan Alizada',
       defaultColor: darkBlueGreen,
+      // Remove the incorrect themeData parameter
       child: const YellowButtonTestScreen(),
     );
   }

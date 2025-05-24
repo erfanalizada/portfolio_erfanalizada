@@ -56,6 +56,23 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  # Add assets section to include font files
+  assets:
+    - assets/KohSantepheap-Regular.ttf
+    - assets/KohSantepheap-Bold.ttf
+    - assets/KohSantepheap-Light.ttf
+    - assets/pictures/project_pic.png
+
+  # Font configuration
+  fonts:
+    - family: KohSantepheap
+      fonts:
+        - asset: assets/KohSantepheap-Regular.ttf
+        - asset: assets/KohSantepheap-Bold.ttf
+          weight: 700
+        - asset: assets/KohSantepheap-Light.ttf
+          weight: 300
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
