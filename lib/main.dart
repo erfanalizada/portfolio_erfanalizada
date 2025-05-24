@@ -44,6 +44,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       'primary': Color(0xFFDAB11C),
       'text': Color(0xFF001E29),
       'text_secondary': Color(0xFF217D96),
+      'shadow': Color.fromARGB(138, 0, 0, 0),
+
     };
 
     final darkModeColors = {
@@ -52,6 +54,8 @@ class _MyAppState extends ConsumerState<MyApp> {
       'primary': Color(0xFFDAB11C),
       'text': Color(0xFFFFFFFF),
       'text_secondary': Color(0xFF55C3E1),
+      'shadow': Color.fromARGB(138, 0, 0, 0),
+
     };
     
     // Initialize custom theme colors

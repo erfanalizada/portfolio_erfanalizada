@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_theme_changer_erfan/dynamic_theme_picker.dart';
-import 'package:portfolio_erfanalizada/utils/text_formatter_manager.dart';
+import 'package:portfolio_erfanalizada/interfaces/text_formatter_interface.dart';
+import 'package:portfolio_erfanalizada/managers/text_formatter_manager.dart';
 import 'package:portfolio_erfanalizada/widgets/project_container_widget.dart';
 import 'package:portfolio_erfanalizada/widgets/yellow_button.dart';
 
@@ -15,20 +16,21 @@ class YellowButtonTestScreen extends ConsumerStatefulWidget {
 
 class _YellowButtonTestScreenState
     extends ConsumerState<YellowButtonTestScreen> {
-  final TextFormatterManager _textFormatter = TextFormatterManager();
-  
+  // Use the interface type instead of the concrete implementation
+  final TextFormatterInterface _textFormatter = TextFormatterManager();
+
   @override
   Widget build(BuildContext context) {
     final colorPalette = CustomThemeColorPalette(ref);
-    
+
     // Define the bullet points
     final String title = "flutter_theme_changer_erfan";
     final List<String> bulletPoints = [
       "This flutter package allows users to implement a widget that allows dynamic theme changes.",
       "Supports various light and dark themes.",
-      "Easy to integrate with existing Flutter applications."
+      "Easy to integrate with existing Flutter applications.",
     ];
-    
+
     return Scaffold(
       backgroundColor: colorPalette.getColor('main_background'),
       appBar: AppBar(title: const Text('Yellow Button Test')),
@@ -42,9 +44,7 @@ class _YellowButtonTestScreenState
               subtitle: "A Flutter package for changing app themes globally",
               containerWidth: 290,
               containerHeight: 400,
-              imageUrls: [
-                "assets/pictures/project_pic.png",
-              ],
+              imageUrls: ["assets/pictures/project_pic.png"],
               // Use the custom widget builder for formatted text
               customTextWidget: _textFormatter.buildTitleWithBulletPoints(
                 title,
@@ -53,7 +53,7 @@ class _YellowButtonTestScreenState
                   fontFamily: 'KohSantepheap',
                   fontSize: 12.0,
                   fontWeight: FontWeight.normal,
-                  color: colorPalette.getColor('text_secondary'),
+                  color: colorPalette.getColor('primary'),
                 ),
                 bulletStyle: TextStyle(
                   fontFamily: 'KohSantepheap',
@@ -67,9 +67,19 @@ class _YellowButtonTestScreenState
               titleColor: colorPalette.getColor('primary'),
               subtitleColor: colorPalette.getColor('text'),
               textColor: colorPalette.getColor('text'),
+              shadowColor: colorPalette.getColor('shadow'),
+              imageBorderColor: colorPalette.getColor('text'),
+              imageBorderWidth: 0.5,
+              containerBorderColor: colorPalette.getColor('text'),
+              containerBorderWidth: 0.5,
+
+              hoverGlowColor: Colors.amber, // Custom glow color
+              hoverGlowRadius: 15.0, // Custom glow radius
+              enableHoverEffect: true, // Enable/disable hover effect
+
               imageHeight: 150,
               imageWidth: 270,
-              imageRadius: 25,
+              imageRadius: 10,
               yellowButton: YellowButton(
                 text: "View Project",
                 onPressed: () {
