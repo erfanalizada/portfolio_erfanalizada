@@ -12,7 +12,7 @@ abstract class TextFormatterInterface {
   
   /// Creates a formatted text with a title and bullet points
   Widget buildTitleWithBulletPoints(
-    String? title,
+    String title,
     List<String> bulletPoints, {
     TextStyle? titleStyle,
     TextStyle? bulletStyle,

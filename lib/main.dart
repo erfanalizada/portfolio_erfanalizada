@@ -5,6 +5,9 @@ import 'package:portfolio_erfanalizada/interfaces/main_manager_interface.dart';
 import 'package:portfolio_erfanalizada/managers/main_manager.dart';
 import 'package:portfolio_erfanalizada/screens/yellow_button_test_screen.dart';
 
+// Create a provider to track if initialization is complete
+final initializationCompleteProvider = StateProvider<bool>((ref) => false);
+
 void main() {
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +27,6 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
-  bool _isInitialized = false;
   // Use the interface type instead of the concrete implementation
   final MainManagerInterface _mainManager = MainManager();
 
@@ -34,9 +36,8 @@ class _MyAppState extends ConsumerState<MyApp> {
     // Initialize theme once during initialization
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _mainManager.initializeTheme(ref);
-      setState(() {
-        _isInitialized = true;
-      });
+      // Mark initialization as complete
+      ref.read(initializationCompleteProvider.notifier).state = true;
     });
   }
 
@@ -44,8 +45,11 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final defaultColor = _mainManager.getDefaultColor();
     
+    // Watch initialization state
+    final isInitialized = ref.watch(initializationCompleteProvider);
+    
     // Show loading indicator until initialization is complete
-    if (!_isInitialized) {
+    if (!isInitialized) {
       return MaterialApp(
         home: Scaffold(
           body: Center(

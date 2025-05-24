@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_theme_changer_erfan/dynamic_theme_picker.dart';
+import 'package:portfolio_erfanalizada/interfaces/main_manager_interface.dart';
 import 'package:portfolio_erfanalizada/interfaces/text_formatter_interface.dart';
+import 'package:portfolio_erfanalizada/managers/main_manager.dart';
 import 'package:portfolio_erfanalizada/managers/text_formatter_manager.dart';
 import 'package:portfolio_erfanalizada/models/project_container_model.dart';
 import 'package:portfolio_erfanalizada/widgets/project_container_widget.dart';
@@ -19,10 +21,15 @@ class _YellowButtonTestScreenState
     extends ConsumerState<YellowButtonTestScreen> {
   // Use the interface type instead of the concrete implementation
   final TextFormatterInterface _textFormatter = TextFormatterManager();
+  final MainManagerInterface _mainManager = MainManager();
 
   @override
   Widget build(BuildContext context) {
     final colorPalette = CustomThemeColorPalette(ref);
+    
+    // Watch the dark mode state for UI updates
+    final isDarkMode = ref.watch(
+        customThemeColorsProvider.select((state) => state.isDarkMode));
 
     // Define the bullet points
     final String title = "flutter_theme_changer_erfan";
@@ -68,11 +75,54 @@ class _YellowButtonTestScreenState
 
     return Scaffold(
       backgroundColor: colorPalette.getColor('main_background'),
-      appBar: AppBar(title: const Text('Yellow Button Test')),
+      appBar: AppBar(
+        title: const Text('Yellow Button Test'),
+        backgroundColor: colorPalette.getColor('secondary_background'),
+        foregroundColor: colorPalette.getColor('text'),
+        actions: [
+          // Add the theme toggle in the app bar using the package's built-in widget
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DarkLightModeCustomToggle(
+              lightModeColors: _mainManager.getLightModeColors(),
+              darkModeColors: _mainManager.getDarkModeColors(),
+              syncWithAppTheme: true,
+              defaultDarkMode: true, // Default to dark mode
+              key: const Key('themeToggle'),
+            ),
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [ProjectContainerWidget(model: projectModel)],
+          children: [
+            ProjectContainerWidget(model: projectModel),
+            
+            // Add some spacing
+            const SizedBox(height: 20),
+            
+            // Display current theme mode
+            Text(
+              'Current Theme: ${isDarkMode ? "Dark Mode" : "Light Mode"}',
+              style: TextStyle(
+                color: colorPalette.getColor('text'),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            
+            const SizedBox(height: 10),
+            
+            // Add another theme toggle in the body for demonstration
+            DarkLightModeCustomToggle(
+              lightModeColors: _mainManager.getLightModeColors(),
+              darkModeColors: _mainManager.getDarkModeColors(),
+              syncWithAppTheme: true,
+              defaultDarkMode: true,
+              key: const Key('bodyThemeToggle'),
+            ),
+          ],
         ),
       ),
     );

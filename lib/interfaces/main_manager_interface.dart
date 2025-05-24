@@ -10,4 +10,10 @@ abstract class MainManagerInterface {
   
   /// Get the app title
   String getAppTitle();
+  
+  /// Get light mode colors
+  Map<String, Color> getLightModeColors();
+  
+  /// Get dark mode colors
+  Map<String, Color> getDarkModeColors();
 }
