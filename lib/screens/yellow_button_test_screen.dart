@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_theme_changer_erfan/dynamic_theme_picker.dart';
 import 'package:portfolio_erfanalizada/interfaces/text_formatter_interface.dart';
 import 'package:portfolio_erfanalizada/managers/text_formatter_manager.dart';
+import 'package:portfolio_erfanalizada/models/project_container_model.dart';
 import 'package:portfolio_erfanalizada/widgets/project_container_widget.dart';
 import 'package:portfolio_erfanalizada/widgets/yellow_button.dart';
 
@@ -31,63 +32,47 @@ class _YellowButtonTestScreenState
       "Easy to integrate with existing Flutter applications.",
     ];
 
+    // Create a ProjectContainerModel using the factory constructor with default theme
+    final projectModel = ProjectContainerModel.withDefaultTheme(
+      ref: ref,
+      icon: Icons.work,
+      title: "Theme Changer",
+      subtitle: "A Flutter package for changing app themes globally",
+      containerWidth: 290,
+      containerHeight: 400,
+      imageUrls: ["assets/pictures/project_pic.png"],
+      // Use the custom widget builder for formatted text
+      customTextWidget: _textFormatter.buildTitleWithBulletPoints(
+        title,
+        bulletPoints,
+        titleStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          fontWeight: FontWeight.normal,
+          color: colorPalette.getColor('primary'),
+        ),
+        bulletStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          color: colorPalette.getColor('text'),
+        ),
+      ),
+      yellowButton: YellowButton(
+        text: "View Project",
+        icon: Icons.arrow_forward_ios,
+        onPressed: () {
+          // Handle button press
+        },
+      ),
+    );
+
     return Scaffold(
       backgroundColor: colorPalette.getColor('main_background'),
       appBar: AppBar(title: const Text('Yellow Button Test')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ProjectContainerWidget(
-              icon: Icons.work,
-              title: "Theme Changer",
-              subtitle: "A Flutter package for changing app themes globally",
-              containerWidth: 290,
-              containerHeight: 400,
-              imageUrls: ["assets/pictures/project_pic.png"],
-              // Use the custom widget builder for formatted text
-              customTextWidget: _textFormatter.buildTitleWithBulletPoints(
-                title,
-                bulletPoints,
-                titleStyle: TextStyle(
-                  fontFamily: 'KohSantepheap',
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.normal,
-                  color: colorPalette.getColor('primary'),
-                ),
-                bulletStyle: TextStyle(
-                  fontFamily: 'KohSantepheap',
-                  fontSize: 12.0,
-                  color: colorPalette.getColor('text'),
-                ),
-              ),
-              minWidth: 300,
-              minHeight: 200,
-              containerColor: colorPalette.getColor('secondary_background'),
-              titleColor: colorPalette.getColor('primary'),
-              subtitleColor: colorPalette.getColor('text'),
-              textColor: colorPalette.getColor('text'),
-              shadowColor: colorPalette.getColor('shadow'),
-              imageBorderColor: colorPalette.getColor('text'),
-              imageBorderWidth: 0.5,
-              containerBorderColor: colorPalette.getColor('text'),
-              containerBorderWidth: 0.5,
-
-              hoverGlowColor: Colors.amber, // Custom glow color
-              hoverGlowRadius: 15.0, // Custom glow radius
-              enableHoverEffect: true, // Enable/disable hover effect
-
-              imageHeight: 150,
-              imageWidth: 270,
-              imageRadius: 10,
-              yellowButton: YellowButton(
-                text: "View Project",
-                onPressed: () {
-                  // Handle button press
-                },
-              ),
-            ),
-          ],
+          children: [ProjectContainerWidget(model: projectModel)],
         ),
       ),
     );
