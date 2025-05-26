@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_theme_changer_erfan/dynamic_theme_picker.dart';
 import 'package:portfolio_erfanalizada/managers/profile_manager.dart';
+import 'package:portfolio_erfanalizada/widgets/layout_blueprint.dart';
 import 'package:portfolio_erfanalizada/widgets/profile_container_widget.dart';
 import 'package:portfolio_erfanalizada/widgets/project_container_widget.dart';
 import 'package:portfolio_erfanalizada/widgets/custom_theme_toggle.dart';
@@ -18,6 +19,10 @@ class PortfolioScreen extends ConsumerWidget {
     final profileManager = ref.read(profileManagerProvider);
     final profileModel = profileManager.getProfileContainerModel(ref);
     final projectModel = profileManager.getThemeChangerInfoModel(ref);
+    final aiForSocietyModel = profileManager.getAiForSocietyProjectModel(ref);
+    
+    // Create another profile container model (you might want to add a method in your ProfileManager)
+    // For example: final anotherProfileModel = profileManager.getSecondaryProfileModel(ref);
     
     // Get the correct background color from the theme palette
     final colorPalette = CustomThemeColorPalette(ref);
@@ -38,60 +43,36 @@ class PortfolioScreen extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            // For wider screens, show containers side by side
-            if (constraints.maxWidth > 800) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Profile container with constraints
-                  Expanded(
-                    flex: 1,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 400),
-                      child: ProfileContainerWidget(model: profileModel),
-                    ),
-                  ),
-                  
-                  const SizedBox(width: 24.0),
-                  
-                  // Project container with constraints
-                  Expanded(
-                    flex: 1,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 400),
-                      child: ProjectContainerWidget(model: projectModel),
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              // For narrower screens, stack them vertically with constraints
-              return Column(
-                children: [
-                  // Profile container
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: ProfileContainerWidget(model: profileModel),
-                  ),
-                  
-                  const SizedBox(height: 24.0),
-                  
-                  // Project container
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: ProjectContainerWidget(model: projectModel),
-                  ),
-                ],
-              );
-            }
-          },
+        child: LayoutBlueprint(
+          mainContainer: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: profileModel.containerWidth ?? 750,
+            ),
+            child: ProfileContainerWidget(model: profileModel),
+          ),
+          leftContainers: [
+            // Additional profile container that goes below the main profile
+            ProfileContainerWidget(model: profileModel), 
+            ProfileContainerWidget(model: profileModel),// You'd use secondaryProfileModel here
+          ],
+          rightContainers: [
+            ProjectContainerWidget(model: projectModel),
+            ProjectContainerWidget(model: aiForSocietyModel),
+          ],
         ),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 

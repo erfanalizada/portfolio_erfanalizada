@@ -67,6 +67,7 @@ flutter:
     - assets/pictures/react_pic.png
     - assets/pictures/java_pic.png
     - assets/pictures/nl_pic.png
+    - assets/pictures/ai_for_society.png
 
   # Font configuration
   fonts:

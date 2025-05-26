@@ -7,5 +7,9 @@ abstract class ProfileManagerInterface {
   
   /// Get the theme changer info model
   ProjectContainerModel getThemeChangerInfoModel(WidgetRef ref);
+  
+  /// Get the AI for Society project info model
+  ProjectContainerModel getAiForSocietyProjectModel(WidgetRef ref);
 }
+
 

@@ -20,17 +20,24 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 400),
+      constraints: const BoxConstraints(maxWidth: 370), // Increased from 340 by 30px
       child: LayoutBuilder(
         builder: (context, constraints) {
           // Calculate responsive width and height
+          // Apply 15% width reduction to the container, but add 30px
           final width = max(
-            widget.model.minWidth,
-            widget.model.containerWidth ?? constraints.maxWidth,
+            widget.model.minWidth * 0.85 + 30, // Apply 15% reduction to minimum width, then add 30px
+            (widget.model.containerWidth != null) 
+                ? widget.model.containerWidth! * 0.85 + 30 // Apply 15% reduction to specified width, then add 30px
+                : constraints.maxWidth,
           );
           
+          // Ensure minimum height accommodates the smaller image section
+          // Increase the minimum height to avoid overflow
+          const minHeightForImage = 340.0; // Increased from 315.0 to avoid overflow
+          
           final height = max(
-            widget.model.minHeight,
+            max(widget.model.minHeight, minHeightForImage),
             widget.model.containerHeight ?? constraints.maxHeight,
           );
 
@@ -92,6 +99,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                                   color: widget.model.titleColor,
                                 ),
                                 overflow: TextOverflow.ellipsis,
+                                maxLines: 1, // Limit to 1 line
                               ),
                             ),
                         ],
@@ -100,7 +108,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                     // Subtitle
                     if (widget.model.subtitle != null)
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 4.0), // Reduced from 8.0
                         child: Text(
                           widget.model.subtitle!,
                           style: TextStyle(
@@ -108,6 +116,8 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                             fontSize: 14.0,
                             color: widget.model.subtitleColor,
                           ),
+                          maxLines: 1, // Limit to 1 line
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                 
@@ -115,7 +125,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                     if (widget.model.imageUrls != null && widget.model.imageUrls!.isNotEmpty)
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0), // Reduced from 12.0
                           child: _buildImageGallery(),
                         ),
                       ),
@@ -123,7 +133,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                     // Custom text widget or regular text
                     if (widget.model.customTextWidget != null)
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 4.0), // Reduced from 8.0
                         child: SizedBox(
                           width: double.infinity,
                           child: widget.model.customTextWidget!,
@@ -131,7 +141,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                       )
                     else if (widget.model.text != null && (widget.model.imageUrls == null || widget.model.imageUrls!.length != 1))
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.only(top: 4.0), // Reduced from 8.0
                         child: Text(
                           widget.model.text!,
                           style: TextStyle(
@@ -139,7 +149,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                             fontSize: 14.0,
                             color: widget.model.textColor,
                           ),
-                          maxLines: 3,
+                          maxLines: 2, // Limit to 2 lines
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -147,7 +157,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                     // Yellow Button
                     if (widget.model.yellowButton != null)
                       Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
+                        padding: const EdgeInsets.only(top: 8.0), // Reduced from 16.0
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: widget.model.yellowButton!,
@@ -168,23 +178,27 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
       return const SizedBox.shrink();
     }
     
+    // Define a standard image section height for all containers
+    const standardImageSectionHeight = 165.0;
+    
     if (widget.model.imageUrls!.length == 1) {
       // For a single image, create a column with the image and text
       return LayoutBuilder(
         builder: (context, constraints) {
-          // Calculate available height for image to prevent overflow
-          double availableHeight = constraints.maxHeight;
-          if (widget.model.text != null) {
-            // Reserve space for text (approximate)
-            availableHeight -= 50; // Reserve space for text + padding
-          }
+          // Calculate available height for image after accounting for text
+          final textHeight = widget.model.text != null ? 40.0 : 0.0; // Estimated text height
+          final availableImageHeight = min(standardImageSectionHeight, constraints.maxHeight - textHeight);
+          
+          // Calculate 85% of the available width (15% smaller) + 30px
+          final imageWidth = constraints.maxWidth * 0.85 + 30;
           
           return Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.min, // Use minimum space needed
             children: [
-              // Image with constrained height
+              // Center the image with adjusted width and height
               SizedBox(
-                height: availableHeight > 0 ? availableHeight : constraints.maxHeight * 0.7,
+                height: availableImageHeight,
+                width: imageWidth,
                 child: _buildSingleImage(widget.model.imageUrls!.first),
               ),
               if (widget.model.text != null)
@@ -198,7 +212,7 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
                       color: widget.model.textColor,
                     ),
                     textAlign: TextAlign.center,
-                    maxLines: 2,
+                    maxLines: 2, // Limit to 2 lines
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -208,31 +222,48 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
       );
     }
     
-    // For multiple images, use a grid with fixed height
+    // For multiple images, use a grid with fixed height and adjusted width
     return LayoutBuilder(
       builder: (context, constraints) {
-        return GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8.0,
-            mainAxisSpacing: 8.0,
-            childAspectRatio: 1.0, // Square items
+        // Calculate available height
+        final availableHeight = min(standardImageSectionHeight, constraints.maxHeight);
+        
+        // Calculate 85% of the available width (15% smaller) + 30px
+        final gridWidth = constraints.maxWidth * 0.85 + 30;
+        
+        return Center(
+          child: SizedBox(
+            height: availableHeight,
+            width: gridWidth,
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
+                childAspectRatio: 1.0, // Square items
+              ),
+              itemCount: widget.model.imageUrls!.length,
+              itemBuilder: (context, index) {
+                return _buildSingleImage(widget.model.imageUrls![index]);
+              },
+            ),
           ),
-          itemCount: widget.model.imageUrls!.length,
-          itemBuilder: (context, index) {
-            return _buildSingleImage(widget.model.imageUrls![index]);
-          },
         );
       }
     );
   }
 
   Widget _buildSingleImage(String imageUrl) {
+    // Calculate the width - either use the model's width minus 15px or default to container width minus 15px
+    final adjustedWidth = (widget.model.imageWidth != null) 
+        ? widget.model.imageWidth! - 15.0 
+        : double.infinity;
+        
     return Container(
-      width: widget.model.imageWidth ?? widget.model.imageSize,
-      height: widget.model.imageHeight ?? widget.model.imageSize,
+      width: adjustedWidth,
+      height: widget.model.imageHeight,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.model.imageRadius ?? 8.0),
         border: widget.model.imageBorderColor != null
@@ -242,23 +273,13 @@ class _ProjectContainerWidgetState extends State<ProjectContainerWidget> {
               )
             : null,
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: AssetImage(imageUrl),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

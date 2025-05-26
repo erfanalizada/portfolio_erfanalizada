@@ -100,11 +100,80 @@ class ModelBuilderManager implements ModelBuilderInterface {
         },
       ),
       
-      // Sizing properties
-      containerWidth: 290,
-      containerHeight: 400,
-      minWidth: 250.0,
-      minHeight: 350.0,
+      // Sizing properties - standardized for consistency with 15% width reduction + 30px
+      containerWidth: 370, // Increased from 340 by 30px
+      containerHeight: 450,
+      minWidth: 285.0, // Increased from 255 by 30px
+      minHeight: 400.0,
+      
+      // Color properties
+      containerColor: colorPalette.getColor('secondary_background'),
+      titleColor: colorPalette.getColor('primary'),
+      subtitleColor: colorPalette.getColor('text'),
+      textColor: colorPalette.getColor('text'),
+      shadowColor: colorPalette.getColor('shadow'),
+      
+      // Border properties
+      containerBorderColor: colorPalette.getColor('primary'),
+      containerBorderWidth: 1.0,
+      imageBorderColor: colorPalette.getColor('primary'),
+      imageBorderWidth: 1.0,
+      
+      // Hover effect properties
+      hoverGlowColor: colorPalette.getColor('primary'),
+      hoverGlowRadius: 12.0,
+      enableHoverEffect: true,
+    );
+  }
+
+  @override
+  ProjectContainerModel buildAiForSocietyProjectModel(WidgetRef ref) {
+    final colorPalette = CustomThemeColorPalette(ref);
+    final textFormatter = TextFormatterManager();
+    
+    // Define the bullet points for the AI for Society project
+    final String title = "AI for Society";
+    final List<String> bulletPoints = [
+      "A project focused on using AI to solve social challenges.",
+      "Implements machine learning models for community benefit.",
+      "Open-source collaboration with multiple contributors.",
+    ];
+    
+    return ProjectContainerModel(
+      // Content properties
+      icon: Icons.psychology,
+      title: "AI for Society",
+      subtitle: "Using technology for social good",
+      // Use an existing image as a temporary replacement
+      imageUrls: ["assets/pictures/ai_for_society.png"], // Using an image we know exists
+      customTextWidget: textFormatter.buildTitleWithBulletPoints(
+        title,
+        bulletPoints,
+        titleStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          fontWeight: FontWeight.normal,
+          color: colorPalette.getColor('primary'),
+        ),
+        bulletStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          color: colorPalette.getColor('text'),
+        ),
+      ),
+      yellowButton: YellowButton(
+        text: "View Project",
+        icon: Icons.arrow_forward_ios,
+        onPressed: () {
+          // Handle button press
+        },
+      ),
+      
+      // Sizing properties - standardized with 15% width reduction + 30px
+      containerWidth: 370, // Increased from 340 by 30px
+      containerHeight: 450,
+      minWidth: 285.0, // Increased from 255 by 30px
+      minHeight: 400.0,
       
       // Color properties
       containerColor: colorPalette.getColor('secondary_background'),
@@ -126,3 +195,8 @@ class ModelBuilderManager implements ModelBuilderInterface {
     );
   }
 }
+
+
+
+
+
