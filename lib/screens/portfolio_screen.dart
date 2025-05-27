@@ -20,6 +20,9 @@ class PortfolioScreen extends ConsumerWidget {
     final profileModel = profileManager.getProfileContainerModel(ref);
     final projectModel = profileManager.getThemeChangerInfoModel(ref);
     final aiForSocietyModel = profileManager.getAiForSocietyProjectModel(ref);
+    final cyberSecuritySemesterModel = profileManager.getCyberSecuritySemesterProjectModel(ref);
+    final youtubeMuxerModel = profileManager.getYoutubeMuxerProjectModel(ref); 
+    final timePickerModel = profileManager.getTimePickerProjectModel(ref);
     
     // Create another profile container model (you might want to add a method in your ProfileManager)
     // For example: final anotherProfileModel = profileManager.getSecondaryProfileModel(ref);
@@ -62,6 +65,9 @@ class PortfolioScreen extends ConsumerWidget {
           rightContainers: [
             ProjectContainerWidget(model: projectModel),
             ProjectContainerWidget(model: aiForSocietyModel),
+            ProjectContainerWidget(model: cyberSecuritySemesterModel),
+            ProjectContainerWidget(model: youtubeMuxerModel),
+            ProjectContainerWidget(model: timePickerModel),
           ],
         ),
       ),

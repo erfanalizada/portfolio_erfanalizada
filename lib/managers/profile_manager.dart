@@ -41,6 +41,18 @@ class ProfileManager implements ProfileManagerInterface {
     final modelBuilder = ref.read(modelBuilderProvider);
     return modelBuilder.buildCyberSecuritySemesterProjectModel(ref);
   }
+
+  @override
+  ProjectContainerModel getYoutubeMuxerProjectModel(WidgetRef ref) {
+    final modelBuilder = ref.read(modelBuilderProvider);
+    return modelBuilder.buildYoutubeMuxerProjectModel(ref);
+  }
+  
+  @override
+  ProjectContainerModel getTimePickerProjectModel(WidgetRef ref) {
+    final modelBuilder = ref.read(modelBuilderProvider);
+    return modelBuilder.buildTimePickerProjectModel(ref);
+  }
 }
 
 

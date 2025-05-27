@@ -253,6 +253,124 @@ class ModelBuilderManager implements ModelBuilderInterface {
       enableHoverEffect: true,
     );
   }
+
+  @override
+  ProjectContainerModel buildYoutubeMuxerProjectModel(WidgetRef ref) {
+    final colorPalette = CustomThemeColorPalette(ref);
+    final textFormatter = TextFormatterManager();
+
+    final String title = "youtube_muxer";
+    final List<String> bulletPoints = [
+      "Open-source Flutter package for merging and muxing YouTube video/audio streams.",
+      "Handles adaptive streaming and supports various formats.",
+      "Published on pub.dev and available for community contributions.",
+      "Easy integration for Flutter video apps.",
+    ];
+
+    return ProjectContainerModel(
+      icon: Icons.video_library,
+      title: "YouTube Muxer",
+      subtitle: "Open-source Flutter package for YouTube stream muxing",
+      imageUrls: ["assets/pictures/youtube_muxer.png"], // Use your asset or a placeholder
+      customTextWidget: textFormatter.buildTitleWithBulletPoints(
+        title,
+        bulletPoints,
+        titleStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          fontWeight: FontWeight.normal,
+          color: colorPalette.getColor('primary'),
+        ),
+        bulletStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          color: colorPalette.getColor('text'),
+        ),
+      ),
+      yellowButton: YellowButton(
+        text: "View on pub.dev",
+        icon: Icons.open_in_new,
+        onPressed: () {
+          // Add your pub.dev or GitHub link action here
+        },
+      ),
+      containerWidth: 370,
+      containerHeight: 450,
+      minWidth: 285.0,
+      minHeight: 400.0,
+      containerColor: colorPalette.getColor('secondary_background'),
+      titleColor: colorPalette.getColor('primary'),
+      subtitleColor: colorPalette.getColor('text'),
+      textColor: colorPalette.getColor('text'),
+      shadowColor: colorPalette.getColor('shadow'),
+      containerBorderColor: colorPalette.getColor('primary'),
+      containerBorderWidth: 1.0,
+      imageBorderColor: colorPalette.getColor('primary'),
+      imageBorderWidth: 1.0,
+      hoverGlowColor: colorPalette.getColor('primary'),
+      hoverGlowRadius: 12.0,
+      enableHoverEffect: true,
+    );
+  }
+
+  @override
+  ProjectContainerModel buildTimePickerProjectModel(WidgetRef ref) {
+    final colorPalette = CustomThemeColorPalette(ref);
+    final textFormatter = TextFormatterManager();
+
+    final String title = "erfan_time_picker";
+    final List<String> bulletPoints = [
+      "A customizable and easy-to-use time picker widget for Flutter.",
+      "Supports 12/24 hour formats, custom themes, and validation.",
+      "Published on pub.dev for the Flutter community.",
+      "Seamless integration with forms and dialogs.",
+    ];
+
+    return ProjectContainerModel(
+      icon: Icons.access_time,
+      title: "Erfan Time Picker",
+      subtitle: "A flexible time picker Flutter package",
+      imageUrls: ["assets/pictures/flutter_pic.png"], // Use a relevant image asset
+      customTextWidget: textFormatter.buildTitleWithBulletPoints(
+        title,
+        bulletPoints,
+        titleStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          fontWeight: FontWeight.normal,
+          color: colorPalette.getColor('primary'),
+        ),
+        bulletStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          color: colorPalette.getColor('text'),
+        ),
+      ),
+      yellowButton: YellowButton(
+        text: "View on pub.dev",
+        icon: Icons.open_in_new,
+        onPressed: () {
+          // Add your pub.dev or GitHub link action here
+        },
+      ),
+      containerWidth: 370,
+      containerHeight: 450,
+      minWidth: 285.0,
+      minHeight: 400.0,
+      containerColor: colorPalette.getColor('secondary_background'),
+      titleColor: colorPalette.getColor('primary'),
+      subtitleColor: colorPalette.getColor('text'),
+      textColor: colorPalette.getColor('text'),
+      shadowColor: colorPalette.getColor('shadow'),
+      containerBorderColor: colorPalette.getColor('primary'),
+      containerBorderWidth: 1.0,
+      imageBorderColor: colorPalette.getColor('primary'),
+      imageBorderWidth: 1.0,
+      hoverGlowColor: colorPalette.getColor('primary'),
+      hoverGlowRadius: 12.0,
+      enableHoverEffect: true,
+    );
+  }
 }
 
 

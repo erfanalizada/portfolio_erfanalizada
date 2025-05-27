@@ -13,4 +13,10 @@ abstract class ModelBuilderInterface {
 
   /// Build a model for the Cyber Security Semester project container
   ProjectContainerModel buildCyberSecuritySemesterProjectModel(WidgetRef ref);
+
+  /// Build a model for the YouTube Muxer Flutter package project container
+  ProjectContainerModel buildYoutubeMuxerProjectModel(WidgetRef ref);
+
+  /// Build a model for the Time Picker Flutter package project container
+  ProjectContainerModel buildTimePickerProjectModel(WidgetRef ref);
 }

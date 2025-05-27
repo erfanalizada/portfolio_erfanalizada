@@ -13,6 +13,12 @@ abstract class ProfileManagerInterface {
 
   /// Get the Cyber Security Semester project info model
   ProjectContainerModel getCyberSecuritySemesterProjectModel(WidgetRef ref);
+
+  /// Get the YouTube Muxer Flutter package project info model
+  ProjectContainerModel getYoutubeMuxerProjectModel(WidgetRef ref);
+
+  /// Get the Time Picker Flutter package project info model
+  ProjectContainerModel getTimePickerProjectModel(WidgetRef ref);
 }
 
 
