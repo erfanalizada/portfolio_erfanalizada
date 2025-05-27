@@ -10,6 +10,9 @@ abstract class ProfileManagerInterface {
   
   /// Get the AI for Society project info model
   ProjectContainerModel getAiForSocietyProjectModel(WidgetRef ref);
+
+  /// Get the Cyber Security Semester project info model
+  ProjectContainerModel getCyberSecuritySemesterProjectModel(WidgetRef ref);
 }
 
 

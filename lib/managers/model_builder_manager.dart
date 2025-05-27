@@ -194,6 +194,65 @@ class ModelBuilderManager implements ModelBuilderInterface {
       enableHoverEffect: true,
     );
   }
+
+  @override
+  ProjectContainerModel buildCyberSecuritySemesterProjectModel(WidgetRef ref) {
+    final colorPalette = CustomThemeColorPalette(ref);
+    final textFormatter = TextFormatterManager();
+
+    final String title = "Cyber Security Semester";
+    final List<String> bulletPoints = [
+      "Learned about network security, cryptography, and ethical hacking.",
+      "Hands-on labs with penetration testing tools (e.g., Kali Linux, Wireshark).",
+      "Completed a group project on securing web applications.",
+      "Studied real-world cyber attacks and defense strategies."
+    ];
+
+    return ProjectContainerModel(
+      icon: Icons.security,
+      title: "Cyber Security Semester",
+      subtitle: "A comprehensive journey into cybersecurity fundamentals",
+      imageUrls: ["assets/pictures/project_pic.png"], // Replace with a relevant image if available
+      customTextWidget: textFormatter.buildTitleWithBulletPoints(
+        title,
+        bulletPoints,
+        titleStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          fontWeight: FontWeight.normal,
+          color: colorPalette.getColor('primary'),
+        ),
+        bulletStyle: TextStyle(
+          fontFamily: 'KohSantepheap',
+          fontSize: 12.0,
+          color: colorPalette.getColor('text'),
+        ),
+      ),
+      yellowButton: YellowButton(
+        text: "View Details",
+        icon: Icons.arrow_forward_ios,
+        onPressed: () {
+          // Handle button press for cybersecurity semester project
+        },
+      ),
+      containerWidth: 370,
+      containerHeight: 450,
+      minWidth: 285.0,
+      minHeight: 400.0,
+      containerColor: colorPalette.getColor('secondary_background'),
+      titleColor: colorPalette.getColor('primary'),
+      subtitleColor: colorPalette.getColor('text'),
+      textColor: colorPalette.getColor('text'),
+      shadowColor: colorPalette.getColor('shadow'),
+      containerBorderColor: colorPalette.getColor('primary'),
+      containerBorderWidth: 1.0,
+      imageBorderColor: colorPalette.getColor('primary'),
+      imageBorderWidth: 1.0,
+      hoverGlowColor: colorPalette.getColor('primary'),
+      hoverGlowRadius: 12.0,
+      enableHoverEffect: true,
+    );
+  }
 }
 
 

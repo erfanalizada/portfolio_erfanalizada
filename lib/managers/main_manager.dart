@@ -5,13 +5,13 @@ import 'package:portfolio_erfanalizada/interfaces/main_manager_interface.dart';
 
 // Define theme colors at the top level for reuse
 final Map<String, Color> appLightModeColors = {
-'main_background': const Color(0xFFF4F6F8),       // Light cool gray – clean and easy on the eyes
-'secondary_background': const Color(0xFFE0E7EF),  // Pale blue-gray – for content blocks or cards
-'primary': const Color(0xFF007BFF),               // Tech blue – vibrant but professional
-'text': const Color.fromARGB(255, 0, 0, 0),                  // Charcoal – softer than black for better reading
-'text_secondary': const Color(0xFF5F6B7A),        // Muted blue-gray – polished for secondary content
-'shadow': const Color.fromARGB(40, 0, 0, 0),      // Light shadow – minimal depth for flat UI
-
+  'main_background': const Color(0xFFF4F6F8),       // Light cool gray – clean and easy on the eyes
+  'secondary_background': const Color(0xFFE0E7EF),  // Pale blue-gray – for content blocks or cards
+  'primary': const Color(0xFF007BFF),               // Tech blue – vibrant but professional
+  'text': const Color.fromARGB(255, 0, 0, 0),       // Charcoal – softer than black for better reading
+  'text_secondary': const Color(0xFF5F6B7A),        // Muted blue-gray – polished for secondary content
+  'shadow': const Color.fromARGB(40, 0, 0, 0),      // Light shadow – minimal depth for flat UI
+  'off_white': const Color(0xFFF8F9FA),             // Off-white – softer than pure white
 };
 
 final Map<String, Color> appDarkModeColors = {
@@ -71,4 +71,5 @@ class MainManager implements MainManagerInterface {
     return appDarkModeColors;
   }
 }
+
 

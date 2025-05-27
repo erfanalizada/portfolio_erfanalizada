@@ -10,4 +10,7 @@ abstract class ModelBuilderInterface {
   
   /// Build a model for the AI for Society project container
   ProjectContainerModel buildAiForSocietyProjectModel(WidgetRef ref);
+
+  /// Build a model for the Cyber Security Semester project container
+  ProjectContainerModel buildCyberSecuritySemesterProjectModel(WidgetRef ref);
 }

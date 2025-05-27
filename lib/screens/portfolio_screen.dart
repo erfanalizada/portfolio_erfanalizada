@@ -26,13 +26,17 @@ class PortfolioScreen extends ConsumerWidget {
     
     // Get the correct background color from the theme palette
     final colorPalette = CustomThemeColorPalette(ref);
-    final backgroundColor = colorPalette.getColor('main_background');
+    final backgroundColor = isDarkMode 
+        ? colorPalette.getColor('main_background')
+        : colorPalette.getColor('off_white');
     
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         title: const Text('Portfolio'),
-        backgroundColor: colorPalette.getColor('secondary_background'),
+        backgroundColor: isDarkMode 
+            ? colorPalette.getColor('secondary_background')
+            : colorPalette.getColor('primary'), // Darker color for light mode
         actions: [
           // Use the custom theme toggle widget
           const Padding(
@@ -64,6 +68,8 @@ class PortfolioScreen extends ConsumerWidget {
     );
   }
 }
+
+
 
 
 

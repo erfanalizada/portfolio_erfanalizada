@@ -35,6 +35,12 @@ class ProfileManager implements ProfileManagerInterface {
     final modelBuilder = ref.read(modelBuilderProvider);
     return modelBuilder.buildAiForSocietyProjectModel(ref);
   }
+  
+  @override
+  ProjectContainerModel getCyberSecuritySemesterProjectModel(WidgetRef ref) {
+    final modelBuilder = ref.read(modelBuilderProvider);
+    return modelBuilder.buildCyberSecuritySemesterProjectModel(ref);
+  }
 }
 
 
